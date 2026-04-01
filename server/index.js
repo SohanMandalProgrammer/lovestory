@@ -63,8 +63,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`💕 LoveStory server running on http://localhost:${PORT}`);
-});
-
+// Export for serverless environments (Vercel)
 module.exports = app;
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`💕 LoveStory server running on http://localhost:${PORT}`);
+  });
+}
