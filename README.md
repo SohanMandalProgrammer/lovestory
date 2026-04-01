@@ -52,8 +52,8 @@ A full-stack romantic web application where users create personalized love pages
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/yourusername/lovestory-creator.git
-cd lovestory-creator
+git clone https://github.com/SohanMandalProgrammer/lovestory.git
+cd lovestory
 npm run install:all
 ```
 
@@ -106,7 +106,8 @@ This starts:
 
 ```
 lovestory/
-├── package.json              # Root scripts (concurrently)
+├── vercel.json               # Unified Vercel configuration
+├── package.json              # Root scripts + unified dependencies
 ├── client/                   # React frontend
 │   ├── src/
 │   │   ├── App.jsx           # Routes
@@ -131,11 +132,10 @@ lovestory/
 │   │   └── utils/
 │   │       └── api.js              # Axios instance
 │   ├── tailwind.config.js
-│   ├── vite.config.js
-│   └── vercel.json
+│   └── vite.config.js
 │
 └── server/
-    ├── index.js              # Express app + middleware
+    ├── index.js              # Express app + middleware (serverless-ready)
     ├── config/
     │   ├── db.js             # MongoDB connection
     │   └── cloudinary.js     # Cloudinary + Multer
@@ -200,29 +200,19 @@ lovestory/
 
 ---
 
-## ☁️ Deployment
+### Unified Deployment → Vercel (Recommended)
 
-### Frontend → Vercel
+This project is configured for **unified deployment** (Frontend + Backend on one URL).
 
-1. Push your repo to GitHub
-2. Go to [vercel.com](https://vercel.com) → New Project → Import repo
-3. Set **Root Directory** to `client`
-4. Add environment variable:
-   ```
-   VITE_API_URL=https://your-backend.onrender.com/api
-   ```
+1. Push your repo to GitHub.
+2. Go to [vercel.com](https://vercel.com) → New Project → Import repo.
+3. Don't change any settings (Vercel will detect the root `vercel.json`).
+4. Add all environment variables from `server/.env.example` in the Vercel Dashboard.
 5. Deploy ✅
 
-### Backend → Render
+### Manual (Separate) Deployment
 
-1. Go to [render.com](https://render.com) → New Web Service
-2. Connect your GitHub repo
-3. Set:
-   - **Root Directory:** `server`
-   - **Build Command:** `npm install`
-   - **Start Command:** `node index.js`
-4. Add all environment variables from `server/.env.example`
-5. Deploy ✅
+If you prefer separate hosting (e.g., Frontend on Vercel and Backend on Render/Railway):
 
 ### MongoDB Atlas (Free Tier)
 
